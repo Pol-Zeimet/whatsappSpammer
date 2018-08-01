@@ -1,4 +1,4 @@
-starting by using command "npm start"
-Will not package app because whatsapp changes classes in DOM too often
-app requires heavy maintenance due to these frequent changes
-Maybe find other way than going by classnames
+start by using command "npm start"
+
+This is not meant to be serious in any way, just an experimental project I did when I was bored and wanted to annoy some friends.
+Maybe I will work on it some more in the future, package it and whatnot.
