@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class ="container">
+            <form id="spamForm">
+                <div>
+                    <label>Enter the spam amount (between 1 and 2000)</label>
+                    <input id="spamCounter" type = "number" min="1" max ="2000">
+                    <p>Enter your spam text (no more than 200 chars)</p>
+                    <textarea id="spamTextInput" form="spamForm" autofocus>Spam</textarea>
+                </div>         
+                <button id="submitButton" type = "submit">Spam Away!</button>
+            </form>    
+        </div>
+    </body>
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(e){
+            e.preventDefault();
+            spamText = document.querySelector('#spamTextInput').value;
+            if(spamText.length > 200 || spamText.length == 0){
+                document.querySelector('#spamTextInput').value = "Your Text was too long or empty"
+            } else {
+                spamCounter = document.querySelector('#spamCounter').value;
+                ipcRenderer.send('spam:send', spamText, spamCounter);
+            }
+        }
+    </script>
+</html>
